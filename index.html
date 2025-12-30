@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }.grid {
+  width: 90%;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.box {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.box:hover {
+  transform: scale(1.03);
+}
+
+h2 {
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.flowers img {
+  width: 70px;
+  margin: 6px;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+.photo img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+footer {
+  position: fixed;
+  bottom: 10px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.9);
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto);
+  }
+}
+
+  </style>
+</head>
+<body>  <div class="grid"><!-- SONG BOX -->
+<div class="box">
+  <h2>🎶 A Song for You</h2>
+  <p>This song reminds me of you.</p>
+  <audio controls>
+    <source src="song.mp3" type="audio/mpeg">
+    Your browser does not support audio.
+  </audio>
+</div>
+
+<!-- FLOWER BOX -->
+<div class="box flowers">
+  <h2>🌸 Your Favourite Flowers</h2>
+  <div>
+    <img src="tulip.jpg" alt="Tulip" />
+    <img src="hibiscus.jpg" alt="Hibiscus" />
+    <img src="white-rose.jpg" alt="White Rose" />
+    <img src="water-lily.jpg" alt="Water Lily" />
+  </div>
+  <p>Each one is as beautiful as you.</p>
+</div>
+
+<!-- MESSAGE BOX -->
+<div class="box">
+  <h2>💌 A Message for You</h2>
+  <p>
+    Every moment with you feels special.
+    Thank you for being my peace, my smile,
+    and my favourite part of every day.
+    I’m grateful for you — always.
+  </p>
+</div>
+
+<!-- PHOTO BOX -->
+<div class="box photo">
+  <h2>📸 Us</h2>
+  <img src="us.jpg" alt="Our Photo" />
+  <p>My favourite picture.</p>
+</div>
+
+  </div>  <footer>
+    Made with ❤️ by Rihan
+  </footer></body>
+</html>
