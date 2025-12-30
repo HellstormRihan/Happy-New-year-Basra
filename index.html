@@ -7,59 +7,97 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      background: radial-gradient(circle at top, #ffafbd, #ffc3a0);
       min-height: 100vh;
+      overflow-x: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-    }.grid {
+    }/* Petals */
+.petal, .flower-petal {
+  position: fixed;
+  top: -10vh;
+  font-size: 20px;
+  animation: fall linear infinite;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  animation: fadeOut 2s ease 3s forwards;
+}
+
+.overlay h1 {
+  color: white;
+  font-size: 2.5rem;
+  text-align: center;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+@keyframes pulse {
+  50% { transform: scale(1.1); }
+}
+
+/* Grid */
+.grid {
   width: 90%;
   max-width: 900px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 20px;
+  opacity: 0;
+  animation: showGrid 1.5s ease 3.2s forwards;
+}
+
+@keyframes showGrid {
+  to { opacity: 1; }
 }
 
 .box {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(12px);
-  border-radius: 20px;
+  border-radius: 22px;
   padding: 20px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  color: white;
   text-align: center;
-  transition: transform 0.3s ease;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  transition: transform 0.4s ease;
 }
 
-.box:hover {
-  transform: scale(1.03);
-}
+.box:hover { transform: translateY(-6px) scale(1.02); }
 
-h2 {
-  margin-bottom: 12px;
-  font-size: 1.4rem;
-}
+h2 { margin-bottom: 10px; }
 
-p {
-  font-size: 1rem;
-  line-height: 1.6;
-}
+audio { width: 100%; }
 
-audio {
-  width: 100%;
-  margin-top: 10px;
-}
-
+/* Flowers 3D + Petal effect */
 .flowers img {
   width: 70px;
   margin: 6px;
   border-radius: 10px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+.flowers img:hover {
+  transform: rotateY(15deg) rotateX(10deg) scale(1.1);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.4);
 }
 
 .photo img {
@@ -67,66 +105,87 @@ audio {
   max-height: 250px;
   object-fit: cover;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
 footer {
   position: fixed;
   bottom: 10px;
-  font-size: 0.85rem;
   color: rgba(255,255,255,0.9);
+  font-size: 0.85rem;
 }
 
 @media (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, auto);
-  }
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* Flower petal animation */
+@keyframes fallPetal {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(150px) rotate(360deg); opacity: 0; }
 }
 
   </style>
 </head>
-<body>  <div class="grid"><!-- SONG BOX -->
-<div class="box">
+<body>  <!-- Falling background petals -->  <script>
+    for (let i = 0; i < 25; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      p.textContent = '🌸';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.animationDuration = 5 + Math.random() * 5 + 's';
+      document.body.appendChild(p);
+    }
+  </script>  <!-- Opening overlay -->  <div class="overlay">
+    <h1>Happy New Year<br>My Love ❤️</h1>
+  </div>  <!-- Main content -->  <div class="grid"><div class="box">
   <h2>🎶 A Song for You</h2>
-  <p>This song reminds me of you.</p>
+  <p>This song always reminds me of you.</p>
   <audio controls>
     <source src="song.mp3" type="audio/mpeg">
-    Your browser does not support audio.
   </audio>
 </div>
 
-<!-- FLOWER BOX -->
 <div class="box flowers">
   <h2>🌸 Your Favourite Flowers</h2>
-  <div>
-    <img src="tulip.jpeg" alt="Tulip" />
-    <img src="hibiscus.jpeg" alt="Hibiscus" />
-    <img src="white-rose.jpeg" alt="White Rose" />
-    <img src="water-lily.jpeg" alt="Water Lily" />
-  </div>
-  <p>Each one is as beautiful as you.</p>
+  <img src="tulip.jpg" alt="Tulip">
+  <img src="hibiscus.jpg" alt="Hibiscus">
+  <img src="white-rose.jpg" alt="White Rose">
+  <img src="water-lily.jpg" alt="Water Lily">
+
+  <!-- Flower petals container -->
+  <div class="petal-container"></div>
 </div>
 
-<!-- MESSAGE BOX -->
 <div class="box">
   <h2>💌 A Message for You</h2>
   <p>
-    Every moment with you feels special.
-    Thank you for being my peace, my smile,
-    and my favourite part of every day.
-    I’m grateful for you — always.
+    Every year feels brighter with you by my side.
+    Thank you for your love, your patience,
+    and the warmth you bring into my life.
+    I promise to keep choosing you — always.
   </p>
 </div>
 
-<!-- PHOTO BOX -->
 <div class="box photo">
   <h2>📸 Us</h2>
-  <img src="us.jpg" alt="Our Photo" />
-  <p>My favourite picture.</p>
+  <img src="us.jpg" alt="Our Photo">
 </div>
 
-  </div>  <footer>
-    Made with ❤️ by Rihan
-  </footer></body>
+  </div>  <footer>Made with ❤️ by Rihan</footer>  <!-- Flower petals JS -->  <script>
+    const container = document.querySelector('.petal-container');
+
+    function createPetal() {
+      const petal = document.createElement('div');
+      petal.textContent = '🌸';
+      petal.style.position = 'absolute';
+      petal.style.left = Math.random() * 100 + '%';
+      petal.style.fontSize = 15 + Math.random() * 10 + 'px';
+      petal.style.opacity = Math.random();
+      petal.style.animation = `fallPetal ${3 + Math.random() * 3}s linear forwards`;
+      container.appendChild(petal);
+      setTimeout(() => container.removeChild(petal), 6000);
+    }
+
+    setInterval(createPetal, 300);
+  </script></body>
 </html>
