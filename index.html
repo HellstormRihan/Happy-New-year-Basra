@@ -6,10 +6,10 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ffdee9, #b5fffc);
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    background: linear-gradient(135deg, #ffdee9, #b5fffc);
 }
 /* Lock Screen */
 #lockScreen {
@@ -52,7 +52,7 @@ body {
     color: red;
     margin-top: 10px;
 }
-/* Hearts */
+/* Hearts Animation */
 @keyframes heartBurst {
     0% { transform: scale(0) translateY(0); opacity: 1; }
     100% { transform: scale(1.5) translateY(-200px); opacity: 0; }
@@ -118,7 +118,6 @@ body.unlocked::after {
     transform: rotateY(15deg) rotateX(10deg) scale(1.05);
     box-shadow: 0 0 20px rgba(255,192,203,0.6), 0 20px 40px rgba(0,0,0,0.3);
 }
-/* Flower Sparkle */
 .box img::after {
     content: '';
     position: absolute;
@@ -128,20 +127,13 @@ body.unlocked::after {
     opacity: 0;
     transition: opacity 0.5s;
 }
-.box img:hover::after {
-    opacity: 1;
-}
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
-}
-.timeline p {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeUp 0.8s ease forwards;
-}
+.box img:hover::after { opacity: 1; }
+@keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0); } }
+.timeline p { opacity: 0; transform: translateY(10px); animation: fadeUp 0.8s ease forwards; }
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+/* Happy New Year Interface */
+#happyText { text-align: center; font-size: 2em; font-weight: bold; margin: 20px 0; color: #ff0066; animation: pulse 1s infinite alternate; }
+@keyframes pulse { from { transform: scale(1); } to { transform: scale(1.05); } }
 </style>
 </head>
 <body><!-- Password Overlay --><div id="lockScreen">
@@ -152,28 +144,28 @@ body.unlocked::after {
     <button onclick="checkPassword()">Unlock</button>
     <p id="errorMsg"></p>
   </div>
-</div><div class="container">
+</div><div id="happyText">🎉 Happy New Year Love! 🎉</div><div class="container">
   <div class="box">
     <h2>🎶 A Song for You</h2>
     <audio controls>
       <source src="song.mp3" type="audio/mpeg">
     </audio>
-  </div>
-  <div class="box">
+  </div>  <div class="box">
     <h2>🌸 Flowers</h2>
     <img src="tulip.jpeg" alt="Tulip">
     <img src="hibiscus.jpeg" alt="Hibiscus">
     <img src="white-rose.jpeg" alt="White Rose">
     <img src="water-lily.jpeg" alt="Water Lily">
-  </div>
-  <div class="box message">
+  </div>  <div class="box">
+    <h2>📸 Us</h2>
+    <img src="us.jpg" alt="Us Together">
+  </div>  <div class="box message">
     <h2>💌 For You</h2>
     <p>I don’t know exactly when it happened… but somewhere between small glances, quiet laughs, and moments that felt too short, you became my favorite part of every day.</p>
     <p>With you, even ordinary time feels special. A walk, a call, a moment of silence — they all mean more because it’s you. You make my heart feel safe and restless at the same time.</p>
     <p>Loving you isn’t loud or dramatic. It’s gentle. It’s choosing you again and again, even on days when words are hard to find.</p>
     <p>No matter where life takes us, know this: a part of me will always smile when it thinks of you.</p>
-  </div>
-  <div class="box timeline">
+  </div>  <div class="box timeline">
     <h2>📜 Our Timeline</h2>
     <p>16/Nov/2024 - Pink dress, black pant, black shoe, pinkish clip, maroonish glass, green bag, choto earrings</p>
     <p>16/Feb/2025 - Hold hands (book fair)</p>
@@ -184,7 +176,7 @@ body.unlocked::after {
     <p>25/May/2025 - First kissy in head and hand</p>
     <p>31/May/2025 - Basuuu kissed and I kissed her cheek</p>
     <p>16/Jun/2025 - Fake breakup</p>
-    <p>17/Jun/2025 - Basra kissed me</p>
+    <p>17/Jun/2025 - Basra kissed me</p> 
     <p>18/Aug/2025 - Special photoBooth day</p>
   </div>
 </div><script>
