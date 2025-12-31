@@ -1,396 +1,199 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For Her ❤️</title>  <style>
-    body {
-      background: linear-gradient(135deg, #ffdee9, #b5fffc);
-    }
-
-    body.unlocked {
-      background: radial-gradient(circle at top, #1b2735 0%, #090a0f 100%);
-      color: #fff;
-    }
-
-    body.unlocked::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: radial-gradient(1px 1px at 20% 30%, white, transparent),
-                        radial-gradient(1px 1px at 80% 20%, white, transparent),
-                        radial-gradient(1px 1px at 50% 70%, white, transparent),
-                        radial-gradient(1px 1px at 10% 80%, white, transparent),
-                        radial-gradient(1px 1px at 90% 60%, white, transparent);
-      animation: twinkle 4s infinite alternate;
-      pointer-events: none;
-    }
-
-    @keyframes twinkle {
-      from { opacity: 0.6; }
-      to { opacity: 1; }
-    }
-
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ffdee9, #b5fffc);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow-x: hidden;
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      width: 90%;
-      max-width: 1100px;
-    }
-
-    .box {
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 20px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      position: relative;
-      overflow: hidden;
-    }
-
-    h2 {
-      margin-top: 0;
-      color: #d6336c;
-    }
-
-    /* Music */
-    audio {
-      width: 100%;
-      margin-top: 10px;
-    }
-
-    /* Flowers */
-    .flowers img {
-      width: 70px;
-      margin: 6px;
-      border-radius: 12px;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-    }
-
-    .flowers img:hover {
-      transform: rotateY(15deg) rotateX(10deg) scale(1.15);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.45);
-    }
-
-    .petal-container {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    /* Zodiac */
-    .leo {
-      font-size: 80px;
-      animation: glow 2.5s infinite alternate;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #ff9800; transform: scale(1); }
-      to { text-shadow: 0 0 25px #ff5722; transform: scale(1.08); }
-    }
-
-    /* Timeline */
-    .timeline {
-      text-align: left;
-      font-size: 14px;
-      line-height: 1.6;
-      max-height: 300px;
-      overflow-y: auto;
-      padding-right: 5px;
-    }
-
-    .timeline p {
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeUp 0.8s ease forwards;
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-      margin: 6px 0;
-    }
-
-    /* Photo */
-    .photo img {
-      width: 100%;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    }
-
-    /* Message */
-    .message {
-      font-size: 15px;
-      line-height: 1.7;
-      color: #333;
-    }
-
-    @keyframes fallPetal {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(180px) rotate(360deg); opacity: 0; }
-    }
-  
-    /* Lock Screen */
-    #lockScreen {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .lockBox {
-      background: rgba(255,255,255,0.9);
-      padding: 30px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-      width: 90%;
-      max-width: 350px;
-    }
-
-    .lockBox input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
-
-    .lockBox button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 12px;
-      background: #d6336c;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    #errorMsg {
-      color: red;
-      margin-top: 10px;
-    }
-
-
-    @keyframes heartBurst {
-      0% { transform: scale(0) translateY(0); opacity: 1; }
-      100% { transform: scale(1.5) translateY(-200px); opacity: 0; }
-    }
-
-    body.rainy::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.1) 4px
-      );
-      animation: rain 0.4s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes rain {
-      from { background-position: 0 0; }
-      to { background-position: 0 20px; }
-    }
-
-
-    @keyframes firework {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(300px) scale(0); opacity: 0; }
-    }
-
-</style></head>
-<body>  <!-- Password Overlay -->  <div id="lockScreen">
-    <div class="lockBox">
-      <h2>🔐 Happy New Year Love</h2>
-      <p>Only for you 💖</p>
-      <input type="password" id="passwordInput" placeholder="Enter our secret">
-      <button onclick="checkPassword()">Unlock</button>
-      <p id="errorMsg"></p>
-    </div>
-  </div>  <div class="container"><div class="box">
-  <h2>🎶 A Song for You</h2>
-  <audio controls>
-    <source src="song.mp3" type="audio/mpeg">
-  </audio>
-</div>
-
-<div class="box flowers">
-  <h2>🌸 Your Favourite Flowers</h2>
-  <img src="tulip.jpeg" alt="Tulip">
-  <img src="hibiscus.jpeg" alt="Hibiscus">
-  <img src="white-rose.jpeg" alt="White Rose">
-  <img src="water-lily.jpeg" alt="Water Lily">
-  <div class="petal-container"></div>
-</div>
-
-<div class="box">
-  <h2>♌ Her Zodiac</h2>
-  <div class="leo">♌</div>
-  <p>Strong. Warm. Fearless. And somehow… soft with me.</p>
-</div>
-
-<div class="box">
-  <h2>📜 Our Little Timeline</h2>
-  <div class="timeline">
-    <p><b>16 Nov 2024:</b> she wore Pink dress, black pants,black shoe, pinkish clip, maroonish glass, green bag, choto top earrings  💗</p>
-    <p><b>16 Feb 2025:</b> Holding hands at book fair</p>
-    <p><b>13 Apr 2025:</b> Second date, second time holding hands</p>
-    <p><b>12 May 2025:</b> Said “I love you” on the phone ❤️</p>
-    <p><b>13 May 2025:</b> Arabian Café date ☕</p>
-    <p><b>17 May 2025:</b> KFC date 🍗</p>
-    <p><b>25 May 2025:</b> First kiss on head & hand</p>
-    <p><b>31 May 2025:</b> Basuuu kissed me, I kissed her cheek</p>
-    <p><b>16 Jun 2025:</b> Fake breakup</p>
-    <p><b>17 Jun 2025:</b> Basra kissed me</p>
-    <p><b>18 Aug 2025:</b> Photo booth memories 📸</p>
-    <p><i>Let’s see who falls harder… this time I choose to lose.</i></p>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year Love</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffdee9, #b5fffc);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+/* Lock Screen */
+#lockScreen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+.lockBox {
+    background: rgba(255,255,255,0.9);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 350px;
+}
+.lockBox input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+.lockBox button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    background: #d6336c;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+#errorMsg {
+    color: red;
+    margin-top: 10px;
+}
+/* Hearts */
+@keyframes heartBurst {
+    0% { transform: scale(0) translateY(0); opacity: 1; }
+    100% { transform: scale(1.5) translateY(-200px); opacity: 0; }
+}
+/* Fireworks */
+@keyframes firework {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(300px) scale(0); opacity: 0; }
+}
+/* Rain */
+body.rainy::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(transparent, transparent 2px, rgba(0,0,0,0.1) 4px);
+    animation: rain 0.4s linear infinite;
+    pointer-events: none;
+}
+@keyframes rain { from { background-position:0 0; } to { background-position:0 20px; } }
+/* Starry Sky */
+body.unlocked {
+    background: radial-gradient(circle at top, #1b2735 0%, #090a0f 100%);
+    color: #fff;
+}
+body.unlocked::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(1px 1px at 20% 30%, white, transparent),
+                      radial-gradient(1px 1px at 80% 20%, white, transparent),
+                      radial-gradient(1px 1px at 50% 70%, white, transparent),
+                      radial-gradient(1px 1px at 10% 80%, white, transparent),
+                      radial-gradient(1px 1px at 90% 60%, white, transparent);
+    animation: twinkle 4s infinite alternate;
+    pointer-events: none;
+}
+@keyframes twinkle { from {opacity:0.6;} to {opacity:1;} }
+/* Container */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+.box {
+    background: rgba(255,255,255,0.8);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 10px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+.box img {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    animation: float 4s ease-in-out infinite;
+    position: relative;
+}
+.box img:hover {
+    transform: rotateY(15deg) rotateX(10deg) scale(1.05);
+    box-shadow: 0 0 20px rgba(255,192,203,0.6), 0 20px 40px rgba(0,0,0,0.3);
+}
+/* Flower Sparkle */
+.box img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+.box img:hover::after {
+    opacity: 1;
+}
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+.timeline p {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeUp 0.8s ease forwards;
+}
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body><!-- Password Overlay --><div id="lockScreen">
+  <div class="lockBox">
+    <h2>🔐 Happy New Year Love</h2>
+    <p>Only for you 💖</p>
+    <input type="password" id="passwordInput" placeholder="Enter our secret">
+    <button onclick="checkPassword()">Unlock</button>
+    <p id="errorMsg"></p>
   </div>
-</div>
-
-<div class="box message">
-  <h2>💌 For You</h2>
-  <p>
-    I don’t know exactly when it happened… but somewhere between small glances,
-    quiet laughs, and moments that felt too short, you became my favorite part
-    of every day.
-  </p>
-  <p>
-    With you, even ordinary time feels special. A walk, a call, a moment of
-    silence — they all mean more because it’s you. You make my heart feel safe
-    and restless at the same time.
-  </p>
-  <p>
-    Loving you isn’t loud or dramatic. It’s gentle. It’s choosing you again
-    and again, even on days when words are hard to find.
-  </p>
-  <p>
-    No matter where life takes us, know this: a part of me will always smile
-    when it thinks of you.
-  </p>
-</div>
-
-<div class="box photo">
-  <h2>📷 Us</h2>
-  <img src="us.jpg" alt="Us Together">
-</div>
-
-  </div>  <script>
-  function triggerFireworks() {
-    for (let i = 0; i < 25; i++) {
-      const spark = document.createElement('div');
-      spark.style.position = 'fixed';
-      spark.style.top = '0';
-      spark.style.left = Math.random() * 100 + '%';
-      spark.style.width = '6px';
-      spark.style.height = '6px';
-      spark.style.borderRadius = '50%';
-      spark.style.background = `hsl(${Math.random()*360},100%,60%)`;
-      spark.style.animation = 'firework 1.8s ease-out forwards';
-      document.body.appendChild(spark);
-      setTimeout(() => spark.remove(), 2000);
-    }
-  }
-
-  function vibratePhone() {
-    if (navigator.vibrate) {
-      navigator.vibrate([200, 100, 200, 100, 300]);
-    }
-  }
-
-  function checkPassword() {
-    const pass = document.getElementById('passwordInput').value;
-
-    if (pass === correctPassword) {
-      playSound('success');
-      createHearts();
-      triggerFireworks();
-      vibratePhone();
-      document.body.classList.add('unlocked');
-      document.getElementById('lockScreen').style.display = 'none';
-
-      document.querySelectorAll('.timeline p').forEach((p, i) => {
-        p.style.animationDelay = `${i * 0.4}s`;
-      });
-    } else {
-      playSound('fail');
-      startRain();
-      document.getElementById('errorMsg').textContent = "That’s not it… try again 💔";
-    }
-  }
-    } else {
-      playSound('fail');
-      startRain();
-      document.getElementById('errorMsg').textContent = "That’s not it… try again 💔";
-    }
-  }
-
-  function createHearts() {
-    for (let i = 0; i < 20; i++) {
-      const heart = document.createElement('div');
-      heart.textContent = '❤️';
-      heart.style.position = 'fixed';
-      heart.style.left = Math.random() * 100 + '%';
-      heart.style.top = '50%';
-      heart.style.fontSize = 20 + Math.random() * 20 + 'px';
-      heart.style.animation = 'heartBurst 2s ease forwards';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 2000);
-    }
-  }
-
-  function startRain() {
-    document.body.classList.add('rainy');
-  }
-
-  function checkPassword() {
-    const pass = document.getElementById('passwordInput').value;
-
-    if (pass === correctPassword) {
-      playSound('success');
-      createHearts();
-      document.getElementById('lockScreen').style.display = 'none';
-    } else {
-      playSound('fail');
-      startRain();
-      document.getElementById('errorMsg').textContent = "That’s not it… try again 💔";
-    }
-  }
-  }
-
-
-    const container = document.querySelector('.petal-container');
-
-    function createPetal() {
-      const petal = document.createElement('div');
-      petal.textContent = '🌸';
-      petal.style.position = 'absolute';
-      petal.style.left = Math.random() * 100 + '%';
-      petal.style.fontSize = 12 + Math.random() * 12 + 'px';
-      petal.style.animation = `fallPetal ${3 + Math.random() * 3}s linear forwards`;
-      container.appendChild(petal);
-      setTimeout(() => petal.remove(), 6000);
-    }
-
-    setInterval(createPetal, 300);
-  </script></body>
-</html>  
+</div><div class="container">
+  <div class="box">
+    <h2>🎶 A Song for You</h2>
+    <audio controls>
+      <source src="song.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+  <div class="box">
+    <h2>🌸 Flowers</h2>
+    <img src="tulip.jpeg" alt="Tulip">
+    <img src="hibiscus.jpeg" alt="Hibiscus">
+    <img src="white-rose.jpeg" alt="White Rose">
+    <img src="water-lily.jpeg" alt="Water Lily">
+  </div>
+  <div class="box message">
+    <h2>💌 For You</h2>
+    <p>I don’t know exactly when it happened… but somewhere between small glances, quiet laughs, and moments that felt too short, you became my favorite part of every day.</p>
+    <p>With you, even ordinary time feels special. A walk, a call, a moment of silence — they all mean more because it’s you. You make my heart feel safe and restless at the same time.</p>
+    <p>Loving you isn’t loud or dramatic. It’s gentle. It’s choosing you again and again, even on days when words are hard to find.</p>
+    <p>No matter where life takes us, know this: a part of me will always smile when it thinks of you.</p>
+  </div>
+  <div class="box timeline">
+    <h2>📜 Our Timeline</h2>
+    <p>16/Nov/2024 - Pink dress, black pant, black shoe, pinkish clip, maroonish glass, green bag, choto earrings</p>
+    <p>16/Feb/2025 - Hold hands (book fair)</p>
+    <p>13/Apr/2025 - 2nd date, 2nd time holding hands</p>
+    <p>12/May/2025 - Said I love you on phone</p>
+    <p>13/May/2025 - Date at Arabian cafe</p>
+    <p>17/May/2025 - Date at KFC</p>
+    <p>25/May/2025 - First kissy in head and hand</p>
+    <p>31/May/2025 - Basuuu kissed and I kissed her cheek</p>
+    <p>16/Jun/2025 - Fake breakup</p>
+    <p>17/Jun/2025 - Basra kissed me</p>
+    <p>18/Aug/2025 - Special photoBooth day</p>
+  </div>
+</div><script>
+const correctPassword = "basuuu";
+function playSound(type) { const audio = new Audio(type === 'success' ? 'unlock.mp3' : 'sad.mp3'); audio.volume = 0.6; audio.play(); }
+function createHearts() { for (let i=0;i<20;i++){const heart=document.createElement('div');heart.textContent='❤️';heart.style.position='fixed';heart.style.left=Math.random()*100+'%';heart.style.top='50%';heart.style.fontSize=20+Math.random()*20+'px';heart.style.animation='heartBurst 2s ease forwards';document.body.appendChild(heart);setTimeout(()=>heart.remove(),2000);} }
+function triggerFireworks() {for (let i=0;i<25;i++){const spark=document.createElement('div');spark.style.position='fixed';spark.style.top='0';spark.style.left=Math.random()*100+'%';spark.style.width='6px';spark.style.height='6px';spark.style.borderRadius='50%';spark.style.background=`hsl(${Math.random()*360},100%,60%)`;spark.style.animation='firework 1.8s ease-out forwards';document.body.appendChild(spark);setTimeout(()=>spark.remove(),2000);}}
+function vibratePhone(){if(navigator.vibrate) navigator.vibrate([200,100,200,100,300]);}
+function startRain(){document.body.classList.add('rainy');}
+function checkPassword(){const pass=document.getElementById('passwordInput').value;if(pass===correctPassword){playSound('success');createHearts();triggerFireworks();vibratePhone();document.body.classList.add('unlocked');document.getElementById('lockScreen').style.display='none';document.querySelectorAll('.timeline p').forEach((p,i)=>{p.style.animationDelay=`${i*0.4}s`;});}else{playSound('fail');startRain();document.getElementById('errorMsg').textContent="That’s not it… try again 💔";}}
+</script></body>
+</html>
