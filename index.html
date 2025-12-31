@@ -1,145 +1,114 @@
-<!DOCTYPE html><html lang="en">
+  <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For You ❤️</title>
-  <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Her ❤️</title>  <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: radial-gradient(circle at top, #ffafbd, #ffc3a0);
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffdee9, #b5fffc);
       min-height: 100vh;
-      overflow-x: hidden;
       display: flex;
-      align-items: center;
       justify-content: center;
-    }/* Petals */
-.petal, .flower-petal {
-  position: fixed;
-  top: -10vh;
-  font-size: 20px;
-  animation: fall linear infinite;
-  opacity: 0.8;
-  pointer-events: none;
-}
-
-@keyframes fall {
-  to { transform: translateY(110vh) rotate(360deg); }
-}
-
-/* Overlay */
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  animation: fadeOut 2s ease 3s forwards;
-}
-
-.overlay h1 {
-  color: white;
-  font-size: 2.5rem;
-  text-align: center;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
-}
-
-@keyframes pulse {
-  50% { transform: scale(1.1); }
-}
-
-/* Grid */
-.grid {
-  width: 90%;
-  max-width: 900px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  opacity: 0;
-  animation: showGrid 1.5s ease 3.2s forwards;
-}
-
-@keyframes showGrid {
-  to { opacity: 1; }
-}
-
-.box {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
-  border-radius: 22px;
-  padding: 20px;
-  color: white;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-  transition: transform 0.4s ease;
-}
-
-.box:hover { transform: translateY(-6px) scale(1.02); }
-
-h2 { margin-bottom: 10px; }
-
-audio { width: 100%; }
-
-/* Flowers 3D + Petal effect */
-.flowers img {
-  width: 70px;
-  margin: 6px;
-  border-radius: 10px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-}
-
-.flowers img:hover {
-  transform: rotateY(15deg) rotateX(10deg) scale(1.1);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.4);
-}
-
-.photo img {
-  width: 100%;
-  max-height: 250px;
-  object-fit: cover;
-  border-radius: 15px;
-}
-
-footer {
-  position: fixed;
-  bottom: 10px;
-  color: rgba(255,255,255,0.9);
-  font-size: 0.85rem;
-}
-
-@media (max-width: 600px) {
-  .grid { grid-template-columns: 1fr; }
-}
-
-/* Flower petal animation */
-@keyframes fallPetal {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(150px) rotate(360deg); opacity: 0; }
-}
-
-  </style>
-</head>
-<body>  <!-- Falling background petals -->  <script>
-    for (let i = 0; i < 25; i++) {
-      const p = document.createElement('div');
-      p.className = 'petal';
-      p.textContent = '🌸';
-      p.style.left = Math.random() * 100 + 'vw';
-      p.style.animationDuration = 5 + Math.random() * 5 + 's';
-      document.body.appendChild(p);
+      align-items: center;
+      overflow-x: hidden;
     }
-  </script>  <!-- Opening overlay -->  <div class="overlay">
-    <h1>Happy New Year<br>My Love ❤️</h1>
-  </div>  <!-- Main content -->  <div class="grid"><div class="box">
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 1100px;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #d6336c;
+    }
+
+    /* Music */
+    audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    /* Flowers */
+    .flowers img {
+      width: 70px;
+      margin: 6px;
+      border-radius: 12px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    }
+
+    .flowers img:hover {
+      transform: rotateY(15deg) rotateX(10deg) scale(1.15);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.45);
+    }
+
+    .petal-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* Zodiac */
+    .leo {
+      font-size: 80px;
+      animation: glow 2.5s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff9800; transform: scale(1); }
+      to { text-shadow: 0 0 25px #ff5722; transform: scale(1.08); }
+    }
+
+    /* Timeline */
+    .timeline {
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.6;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .timeline p {
+      margin: 6px 0;
+    }
+
+    /* Photo */
+    .photo img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    /* Message */
+    .message {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    @keyframes fallPetal {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(180px) rotate(360deg); opacity: 0; }
+    }
+  </style></head>
+<body>  <div class="container"><div class="box">
   <h2>🎶 A Song for You</h2>
-  <p>This song always reminds me of you.</p>
   <audio controls>
     <source src="song.mp3" type="audio/mpeg">
   </audio>
@@ -151,27 +120,50 @@ footer {
   <img src="hibiscus.jpeg" alt="Hibiscus">
   <img src="white-rose.jpeg" alt="White Rose">
   <img src="water-lily.jpeg" alt="Water Lily">
-
-  <!-- Flower petals container -->
   <div class="petal-container"></div>
 </div>
 
 <div class="box">
-  <h2>💌 A Message for You</h2>
+  <h2>♌ Her Zodiac</h2>
+  <div class="leo">♌</div>
+  <p>Strong. Warm. Fearless. And somehow… soft with me.</p>
+</div>
+
+<div class="box">
+  <h2>📜 Our Little Timeline</h2>
+  <div class="timeline">
+    <p><b>16 Nov 2024:</b> Pink dress, black pant,black shoe, pinkish clip, maroonish glass, green bag, choto top earrings and time was 10:16–10:25 AM 💗</p>
+    <p><b>13 Apr 2025:</b> Second date, second time holding hands</p>
+    <p><b>28 Jan 2025:</b> Butterflies everywhere 🦋</p>
+    <p><b>16 Feb 2025:</b> Holding hands at book fair</p>
+    <p><b>12 May 2025:</b> Said “I love you” on the phone ❤️</p>
+    <p><b>13 May 2025:</b> Arabian Café date ☕</p>
+    <p><b>17 May 2025:</b> KFC date 🍗</p>
+    <p><b>25 May 2025:</b> First kiss on head & hand</p>
+    <p><b>31 May 2025:</b> Basuuu kissed me, I kissed her cheek</p>
+    <p><b>16 Jun 2025:</b> Fake breakup</p>
+    <p><b>17 Jun 2025:</b> Basra kissed me</p>
+    <p><b>12 Aug 2025:</b> Special evening ✨</p>
+    <p><b>18 Aug 2025:</b> Photo booth memories 📸</p>
+    <p><i>Let’s see who falls harder… this time I choose to lose.</i></p>
+  </div>
+</div>
+
+<div class="box message">
+  <h2>💌 For You</h2>
   <p>
-    Every year feels brighter with you by my side.
-    Thank you for your love, your patience,
-    and the warmth you bring into my life.
-    I promise to keep choosing you — always.
+    Every date, every glance, every second stayed with me.
+    Loving you never felt like a risk — it felt like home.
+    Happy New Year, my favorite person.
   </p>
 </div>
 
 <div class="box photo">
-  <h2>📸 Us</h2>
-  <img src="us.jpg" alt="Our Photo">
+  <h2>📷 Us</h2>
+  <img src="us.jpg" alt="Us Together">
 </div>
 
-  </div>  <footer>Made with ❤️ by Rihan</footer>  <!-- Flower petals JS -->  <script>
+  </div>  <script>
     const container = document.querySelector('.petal-container');
 
     function createPetal() {
@@ -179,13 +171,12 @@ footer {
       petal.textContent = '🌸';
       petal.style.position = 'absolute';
       petal.style.left = Math.random() * 100 + '%';
-      petal.style.fontSize = 15 + Math.random() * 10 + 'px';
-      petal.style.opacity = Math.random();
+      petal.style.fontSize = 12 + Math.random() * 12 + 'px';
       petal.style.animation = `fallPetal ${3 + Math.random() * 3}s linear forwards`;
       container.appendChild(petal);
-      setTimeout(() => container.removeChild(petal), 6000);
+      setTimeout(() => petal.remove(), 6000);
     }
 
     setInterval(createPetal, 300);
   </script></body>
-</html>
+  </html>
